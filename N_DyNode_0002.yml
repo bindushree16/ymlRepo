@@ -1,0 +1,14 @@
+pipelines:
+  - name: pipeline_N_DyNode_0002
+    steps:
+      - name: N_DyNode_0002
+        type: Bash
+        configuration:
+          nodePool: u18-eu-west-1-dynamic
+        #  integrations:
+        #    - name: s_gitHub
+        execution:
+          onExecute:
+            - echo "hi"
+            - docker ps -a 
+            - docker images 
