@@ -10,9 +10,9 @@ pipelines:
     steps:
       - name: api_PipelineSteps
         type: Bash
-#         configuration:
-#           inputResources:
-#             - name: my_propertyBag
+        configuration:
+          inputResources:
+            - name: my_propertyBag_one
         execution:
           onExecute:
             - echo "executing step..."
