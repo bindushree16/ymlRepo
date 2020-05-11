@@ -1,5 +1,5 @@
 resources:
-  - name: my_propertyBag
+  - name: my_propertyBag_one
     type: PropertyBag 
     configuration:  
       key1: value1
