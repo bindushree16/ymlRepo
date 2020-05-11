@@ -10,7 +10,7 @@ pipelines:
     steps:
       - name: api_PipelineSteps
         type: Bash
-        configuration:
+#         configuration:
 #           inputResources:
 #             - name: my_propertyBag
         execution:
