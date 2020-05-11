@@ -1,0 +1,18 @@
+resources:
+  - name: my_propertyBag
+    type: PropertyBag 
+    configuration:  
+      key1: value1
+      key2: value2   
+      
+pipelines:
+  - name: PipelineSteps_automation
+    steps:
+      - name: api_PipelineSteps
+        type: Bash
+        configuration:
+          inputResources:
+            - name: my_propertyBag
+        execution:
+          onExecute:
+            - echo "executing step..."
