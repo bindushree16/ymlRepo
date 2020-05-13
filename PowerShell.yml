@@ -1,0 +1,10 @@
+pipelines:
+  - name: pipeline_automation
+    steps:
+      - name: api_pipeline
+        type: PowerShell
+        configuration:
+          nodePool: bindu_win_node
+        execution:
+          onExecute:
+            - write-output "executing step..."
