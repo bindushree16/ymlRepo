@@ -1,19 +1,39 @@
 resources:
-  - name: my_propertyBag_one
-    type: PropertyBag 
-    configuration:  
-      key/1: value1
-      key2: ""   
-      
+  - name: S_Bash1_propertyBag
+    type: PropertyBag
+    configuration:
+      property1: "test"
+
 pipelines:
-  - name: PipelineSteps_automation
+  - name: pipelines_propertyBag_0001
     steps:
-      - name: api_PipelineSteps
+      - name: S_Bash_proper_0001
         type: Bash
         configuration:
           inputResources:
-            - name: my_propertyBag_one
+            - name: S_Bash1_propertyBag
         execution:
           onExecute:
             - echo "executing step..."
-            - printenv
+
+
+
+# resources:
+#   - name: my_propertyBag_one
+#     type: PropertyBag 
+#     configuration:  
+#       key/1: value1
+#       key2: ""   
+      
+# pipelines:
+#   - name: PipelineSteps_automation
+#     steps:
+#       - name: api_PipelineSteps
+#         type: Bash
+#         configuration:
+#           inputResources:
+#             - name: my_propertyBag_one
+#         execution:
+#           onExecute:
+#             - echo "executing step..."
+#             - printenv
