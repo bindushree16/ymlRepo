@@ -4,6 +4,9 @@ resources:
     configuration:
       path: bindushree16/ymlRepo
       gitProvider: bindu_github
+      files:  
+        include: Affinitygroup.yml
+
 
 pipelines:
   - name: sample_AffinitygroupConnections
