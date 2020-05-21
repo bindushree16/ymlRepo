@@ -9,7 +9,6 @@ resources:
       files:  
         include: Affinitygroup.yml
 
-
 pipelines:
   - name: sample_AffinitygroupConnections
     steps:
@@ -105,12 +104,3 @@ pipelines:
         execution:
           onExecute:
             - echo "hi"       
-            
-        
-        
-        
-        
-        
-        
-        
-        
