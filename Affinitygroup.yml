@@ -1,0 +1,92 @@
+resources:
+  - name: MyGitRepo
+    type: GitRepo
+    configuration:
+      path: bindushree16/ymlRepo
+      gitProvider: bindu_github
+
+pipelines:
+  - name: sample_AffinitygroupConnections
+    steps:
+      - name: my_StepConnections
+        type: Bash
+        configuration:
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"
+            
+      - name: stepnum_one
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: my_StepConnections
+          affinityGroup: new_client
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi" 
+            
+      - name: stepnum_two
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: stepnum_one
+          affinityGroup: new_client
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"   
+            
+      - name: stepnum_three
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: stepnum_two
+          affinityGroup: new_client
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"   
+            
+      - name: auto_one
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: my_StepConnections
+          affinityGroup: my_group
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"    
+            
+      - name: auto_two
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: auto_one
+          affinityGroup: my_group
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"  
+            
+      - name: auto_three
+        type: Bash
+        configuration: 
+          inputSteps:
+            - name: auto_two
+          affinityGroup: my_group
+          inputResources:
+            - name: MyGitRepo
+        execution:
+          onExecute:
+            - echo "hi"       
+            
+            
