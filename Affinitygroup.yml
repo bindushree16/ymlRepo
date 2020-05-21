@@ -29,7 +29,19 @@ pipelines:
           onExecute:
             - echo "hi" 
             
-      - name: stepnum_two
+#       - name: stepnum_two
+#         type: Bash
+#         configuration: 
+#           inputSteps:
+#             - name: stepnum_one
+#           affinityGroup: new_client
+#           inputResources:
+#             - name: MyGitRepo
+#         execution:
+#           onExecute:
+#             - echo "hi"   
+            
+      - name: stepnum_three
         type: Bash
         configuration: 
           inputSteps:
@@ -39,19 +51,19 @@ pipelines:
             - name: MyGitRepo
         execution:
           onExecute:
-            - echo "hi"   
+            - echo "hi"  
             
-      - name: stepnum_three
+      - name: stepnum_four
         type: Bash
         configuration: 
           inputSteps:
-            - name: stepnum_two
+            - name: stepnum_three
           affinityGroup: new_client
           inputResources:
             - name: MyGitRepo
         execution:
           onExecute:
-            - echo "hi"   
+            - echo "hi"      
             
       - name: auto_one
         type: Bash
