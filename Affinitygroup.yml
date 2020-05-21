@@ -4,6 +4,8 @@ resources:
     configuration:
       path: bindushree16/ymlRepo
       gitProvider: bindu_github
+      branches: 
+        include: master
       files:  
         include: Affinitygroup.yml
 
