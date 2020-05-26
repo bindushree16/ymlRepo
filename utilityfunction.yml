@@ -31,5 +31,22 @@ pipelines:
             #- compare_git --path ./ymlRepo --commit-range HEAD~1..HEAD (ask)
             
             - update_commit_status repo_pipe --status failure --message "my description" --context "my_utilityFunction_step"
+             # (i am not able to see status on commit )
             - update_commit_status repo_pipe
+            
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout 
+            - encrypt_string "secretValue" --key pub.pem
+            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+            - echo "$encrypted"
+            - decrypt_string "$encrypted" --key key.pem
+            
+            - touch secrets.txt 
+            - echo "my secret keys are here" >> encrypted.txt
+            - cat encrypted.txt
+            - cat pub.pem
+            - encrypt_file --output secrets.txt --key pub.pem
+            - cat secrets.txt
       
