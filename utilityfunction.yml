@@ -28,5 +28,5 @@ pipelines:
            # - bump_semver v1.0.0 badaction
             
             
-            - compare_git --path ./test --commit-range HEAD~1..HEAD 
+            - compare_git --path ./ymlRepo --commit-range HEAD~1..HEAD 
       
