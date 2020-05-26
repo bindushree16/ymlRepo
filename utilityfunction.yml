@@ -2,7 +2,7 @@ resources:
   - name: repo_pipe
     type: GitRepo
     configuration:
-    #  gitProvider: bindu_gitHub
+      gitProvider: bindu_gitHub
       path: bindushree16/ymlRepo
       
 pipelines:
@@ -13,6 +13,8 @@ pipelines:
         configuration:
        #   integrations:
        #     - name: bindu_gitHub
+          inputResources:
+            - name: repo_pipe
             
         execution:
           onExecute: 
