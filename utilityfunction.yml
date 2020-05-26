@@ -25,8 +25,11 @@ pipelines:
             - bump_semver v3.0.0 beta 
             - bump_semver v1.0.0-rc rc
             - bump_semver v1.0.0-rc.12 final
-           # - bump_semver v1.0.0 badaction
+           ## - bump_semver v1.0.0 badaction
             
             
-            - compare_git --path ./ymlRepo --commit-range HEAD~1..HEAD 
+            #- compare_git --path ./ymlRepo --commit-range HEAD~1..HEAD (ask)
+            
+            - update_commit_status myGitRepoResource --status processing --message "my description" --context "my_utilityFunction_step"
+            - update_commit_status myGitRepoResource
       
