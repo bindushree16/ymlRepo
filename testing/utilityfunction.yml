@@ -26,6 +26,7 @@ pipelines:
             - bump_semver v1.0.0-rc rc
             - bump_semver v1.0.0-rc.12 final
            ## - bump_semver v1.0.0 badaction
+            - pushd $res_repo_pipe_resourcePath
             
             - compare_git --resource repo_pipe --commit-range HEAD~2..HEAD utilityfunction.yml
             - pushd $res_repo_pipe_resourcePath
@@ -37,7 +38,7 @@ pipelines:
             - update_commit_status repo_pipe
             
             #- execute_command --retry printfe
-            - read_json $res_repo_pipe_resourcePath/tests/yaml/sample.json "DOCKER_USERNAME"
+            - read_json $res_repo_pipe_resourcePath/testing/yaml/sample.json "DOCKER_USERNAME"
 
 
 
