@@ -25,8 +25,8 @@ pipelines:
             - bump_semver v3.0.0 beta 
             - bump_semver v1.0.0-rc rc
             - bump_semver v1.0.0-rc.12 final
-            - bump_semver v1.0.0 badaction
+           # - bump_semver v1.0.0 badaction
             
             
-            - compare_git --resource repo_pipe --commit-range HEAD~1..HEAD utilityfunction.yml
+            - compare_git --resource repo_pipe --commit-range HEAD~2..HEAD utilityfunction.yml
       
