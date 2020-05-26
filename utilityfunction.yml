@@ -29,6 +29,7 @@ pipelines:
             
             - compare_git --resource repo_pipe --commit-range HEAD~2..HEAD utilityfunction.yml
             - pushd $res_repo_pipe_resourcePath
+            - pwd
             - compare_git --path ./test --commit-range HEAD~1..HEAD 
             
             - update_commit_status repo_pipe --status failure --message "my description" --context "my_utilityFunction_step"
