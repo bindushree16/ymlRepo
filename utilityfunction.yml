@@ -30,25 +30,27 @@ pipelines:
             - compare_git --resource repo_pipe --commit-range HEAD~2..HEAD utilityfunction.yml
             - pushd $res_repo_pipe_resourcePath
             - pwd
-            - compare_git --path $res_repo_pipe_resourcePath/test --commit-range HEAD~1..HEAD 
+            - compare_git --path $res_repo_pipe_resourcePath/test --commit-range HEAD~1..HEAD (doubt)
             
             - update_commit_status repo_pipe --status failure --message "my description" --context "my_utilityFunction_step"
              # (i am not able to see status on commit )
             - update_commit_status repo_pipe
             
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
+            - execute_command --retry printfe
             
-            - touch secrets.txt 
-            - echo "my secret keys are here" >> encrypted.txt
-            - cat encrypted.txt
-            - cat pub.pem
-            - encrypt_file --output secrets.txt --key pub.pem
-            - cat secrets.txt
+#             - openssl genrsa -out key.pem 1024 
+#             - openssl rsa -in key.pem -text -noout
+#             - openssl rsa -in key.pem -pubout -out pub.pem 
+#             - openssl rsa -in pub.pem -pubin -text -noout 
+#             - encrypt_string "secretValue" --key pub.pem
+#             - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+#             - echo "$encrypted"
+#             - decrypt_string "$encrypted" --key key.pem
+            
+#             - touch secrets.txt 
+#             - echo "my secret keys are here" >> encrypted.txt
+#             - cat encrypted.txt
+#             - cat pub.pem
+#             - encrypt_file --output secrets.txt --key pub.pem
+#             - cat secrets.txt
       
