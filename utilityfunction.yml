@@ -30,6 +30,6 @@ pipelines:
             - compare_git --resource repo_pipe --commit-range HEAD~2..HEAD utilityfunction.yml
             #- compare_git --path ./ymlRepo --commit-range HEAD~1..HEAD (ask)
             
-            - update_commit_status repo_pipe --status processing --message "my description" --context "my_utilityFunction_step"
+            - update_commit_status repo_pipe --status failure --message "my description" --context "my_utilityFunction_step"
             - update_commit_status repo_pipe
       
