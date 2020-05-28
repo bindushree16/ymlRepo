@@ -45,6 +45,10 @@ pipelines:
             - echo "name =$res_repo_pipe_gitProvider_name" >> keys
             - replace_envs $PWD/keys 
             - cat keys
+            
+            - touch file.txt
+            - echo "Hello frog" >> file.txt
+            - add_cache_files $PWD/file.txt jfrog_pipe 
 
 
 
