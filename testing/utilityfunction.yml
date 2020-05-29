@@ -53,6 +53,8 @@ pipelines:
             - restore_cache_files jfrog_pipe $PWD/file.txt
             
             - add_run_variables imageTag="master"
+            - export_run_variables
+            - export_pipeline_variables
             
             
             
@@ -89,6 +91,7 @@ pipelines:
             - printenv
             - pushd $res_repo_pipe_resourcePath
             - restore_cache_files jfrog_pipe $PWD/file.txt
+            - export_pipeline_variables
             - popd
 
 
