@@ -1,0 +1,39 @@
+resources:
+  - name: git_repo_resources
+    type: GitRepo
+    configuration:
+      gitProvider: bindu_github
+      path: bindushree16/charts
+   
+  - name: helm_repo
+    type: HelmChart
+    configuration: 
+      sourceArtifactory: varsha_art
+      repository: helm-local/
+      chart: test
+      version: 1.1.0
+
+pipelines:
+  - name: test_helm
+    steps:
+      - name: helm_pub
+        type: HelmPublish
+        configuration:
+          chartPath: stable/tomcat
+          inputResources:
+            - name: git_repo_resources                 # required      
+          outputResources:
+            - name: helm_repo                  # required
+        execution:
+          onStart:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+          onSuccess:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+          onFailure:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+          onComplete: #always
+            - write-output "executing step..."
+            - Get-Variable | format-table
