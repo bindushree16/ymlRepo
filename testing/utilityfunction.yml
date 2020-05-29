@@ -62,7 +62,10 @@ pipelines:
             - add_run_files $PWD/test.txt jfrog
             
             - add_pipeline_variables scm=$int_s_gitHub_masterName
-            - cat scm
+            
+            - add_pipeline_files $PWD/file.txt jfrog_pipeline
+             
+            - find_resource_variable repo_pipe resourcePath
             
             
             
@@ -105,6 +108,8 @@ pipelines:
             - export_pipeline_variables
             
             - restore_run_files jfrog $PWD/test.txt
+            
+            - restore_pipeline_files jfrog_pipeline $PWD/file.txt
             
             - popd
             
