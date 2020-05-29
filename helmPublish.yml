@@ -25,5 +25,5 @@ pipelines:
           outputResources:
             - name: helm_repo                  # required
         execution:
-          onExecute:
-            - printenv
+          onStart:
+            - echo "hi"
