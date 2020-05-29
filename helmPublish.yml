@@ -25,15 +25,4 @@ pipelines:
           outputResources:
             - name: helm_repo                  # required
         execution:
-          onStart:
-            - write-output "executing step..."
-            - Get-Variable | format-table
-          onSuccess:
-            - write-output "executing step..."
-            - Get-Variable | format-table
-          onFailure:
-            - write-output "executing step..."
-            - Get-Variable | format-table
-          onComplete: #always
-            - write-output "executing step..."
-            - Get-Variable | format-table
+          - printenv
