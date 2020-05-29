@@ -52,6 +52,8 @@ pipelines:
             
             - restore_cache_files jfrog_pipe $PWD/file.txt
             
+            - add_run_variables imageTag="master"
+            
             
             
             #             - openssl genrsa -out key.pem 1024 
