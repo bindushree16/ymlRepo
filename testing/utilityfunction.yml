@@ -61,6 +61,9 @@ pipelines:
             - echo "Hello pipelines team" >> test.txt
             - add_run_files $PWD/test.txt jfrog
             
+            - add_pipeline_variables scm=$int_s_gitHub_masterName
+            - cat scm
+            
             
             
             
