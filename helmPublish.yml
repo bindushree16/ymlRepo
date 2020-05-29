@@ -14,7 +14,7 @@ resources:
       version: 1.1.0
 
 pipelines:
-  - name: test_helm
+  - name: test_helm_publish
     steps:
       - name: helm_pub
         type: HelmPublish
