@@ -57,6 +57,12 @@ pipelines:
             - export_pipeline_variables
             
             
+            - touch test.txt
+            - echo "Hello pipelines team" >> test.txt
+            - add_run_files $PWD/test.txt jfrog
+            
+            
+            
             
             #             - openssl genrsa -out key.pem 1024 
 #             - openssl rsa -in key.pem -text -noout
@@ -90,9 +96,15 @@ pipelines:
           onExecute:
             - printenv
             - pushd $res_repo_pipe_resourcePath
+            
             - restore_cache_files jfrog_pipe $PWD/file.txt
+            
             - export_pipeline_variables
+            
+            - restore_run_files jfrog $PWD/test.txt
+            
             - popd
+            
 
 
 
