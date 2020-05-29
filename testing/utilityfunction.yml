@@ -49,16 +49,12 @@ pipelines:
             - touch file.txt
             - echo "Hello frog" >> file.txt
             - add_cache_files $PWD/file.txt jfrog_pipe 
-
-
-
-
-
-
-
-
             
-#             - openssl genrsa -out key.pem 1024 
+            - restore_cache_files jfrog_pipe $PWD/file.txt
+            
+            
+            
+            #             - openssl genrsa -out key.pem 1024 
 #             - openssl rsa -in key.pem -text -noout
 #             - openssl rsa -in key.pem -pubout -out pub.pem 
 #             - openssl rsa -in pub.pem -pubin -text -noout 
@@ -73,4 +69,32 @@ pipelines:
 #             - cat pub.pem
 #             - encrypt_file --output secrets.txt --key pub.pem
 #             - cat secrets.txt
+            
+            - popd
+            
+            
+      - name: utilityfunction_2
+        type: Bash
+        configuration:
+#           integrations:
+#             - name: s_gitHub
+          inputSteps:
+            - name: my_utilityFunction_step
+          inputResources:
+            - name: repo_pipe                
+        execution:
+          onExecute:
+            - printenv
+            - pushd $res_repo_pipe_resourcePath
+            - restore_cache_files jfrog_pipe $PWD/file.txt
+            - popd
+
+
+
+
+
+
+
+            
+
       
