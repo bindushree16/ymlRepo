@@ -74,8 +74,8 @@ pipelines:
       - name: publishgo_moduletest_bindu
         type: GoPublishModule
         configuration:  
-          sourceLocation: /tem  # required
-          version: v1.0.1           # required
+          sourceLocation: .  # required
+          version: v0.0.0           # required
           targetRepository: test-localgo-bindu
           autoPublishBuildInfo: true
           integrations:
