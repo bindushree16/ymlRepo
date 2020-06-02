@@ -1,8 +1,29 @@
+resources:
+
+  - name: gradleBuild_repo
+    type: GitRepo
+    configuration:
+      gitProvider: bindu_github
+      path: bindushree16/project-examples
+      
+  - name: gradle_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: gradle-buildinfo
+      buildNumber: 22    
+      
+  - name: gradle_PromoteBuild
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: gradle-buildinfo
+      buildNumber: 32    
+
 pipelines:
-  - name: test_gradle_pipeline
-    steps:
-    
-      - name: gradle_build_step
+  - name: test_GradleBuild
+    steps:    
+      - name: gradlebuild_step
         type: GradleBuild
         configuration:
           gradleCommand: clean artifactoryPublish -b build.gradle
@@ -10,56 +31,30 @@ pipelines:
           configFileLocation: .
           configFileName: gradle-art-config
           inputResources:
-            - name: gradle_repo
+            - name: gradleBuild_repo
           integrations:
-            - name: varsha_art
+            - name: bindu_art
         execution:
           onStart:
             - javac -version
             - gradle --version
-            
-      - name: publish_build_info_gradle
+      
+      - name: publish_buildinfo_gradle
         type: PublishBuildInfo
-        execution:
-          onStart:
-            - echo "hello"
         configuration:
           inputSteps:
-            - name: gradle_build_step
+            - name: gradlebuild_step        
           outputResources:
-            - name: build_info_gradle
+            - name: gradle_buildinfo
             
-      - name: promote_build_info_gradle
+      - name: promote_gradlebuild_info
         type: PromoteBuild
         configuration:
-          targetRepository: test-generic-local
+          targetRepository: test-localgradle-bindu
           copy: true
           integrations:
-            - name: varsha_art
+            - name: bindu_art
           inputResources:
-            - name: build_info_gradle
+            - name: gradle_buildinfo
           outputResources:
-            - name: promoted_build_info_gradle
-
-resources:
-
-  - name: promoted_build_info_gradle
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: varsha_art
-      buildName: promotoed-full-gradle-native
-      buildNumber: 1
-
-  - name: gradle_repo
-    type: GitRepo
-    configuration:
-      gitProvider: varsha_bbs
-      path: ~vishnur/project-examples
-
-
-  - name: build_info_gradle
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: varsha_art
-      buildName: full-gradle-native
-      buildNumber: 1
+            - name: gradle_PromoteBuild
