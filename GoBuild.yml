@@ -17,7 +17,7 @@ resources:
   - name: artifactorygo_module_example_2
     type: GitRepo
     configuration:
-      path: bindu/artifactory-go-example
+      path: bindushree16/artifactory-go-example
       branches:
         include: master
       gitProvider: bindu_github    
@@ -76,7 +76,7 @@ pipelines:
         configuration:  
           sourceLocation: /tem  # required
           version: v1.0.1           # required
-          targetRepository: test-go-local
+          targetRepository: test-localgo-bindu
           autoPublishBuildInfo: true
           integrations:
             - name: bindu_art
