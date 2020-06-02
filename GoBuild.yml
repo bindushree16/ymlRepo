@@ -2,112 +2,110 @@ resources:
   - name: artifactory_go_exampletest
     type: GitRepo
     configuration:
-      path: ~vishnur/project-examples
+      path: bindushree16/project-examples
       branches:
         include: master
-      gitProvider: varsha_bbs
-
-  - name: artifactory_go_module_example
+      gitProvider: bindu_github
+  
+  - name: go_buildinfo_publish_test
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: go_example_build_publish_bindu
+      buildNumber: 22
+      
+  - name: artifactorygo_module_example_2
     type: GitRepo
     configuration:
-      path: ~vishnur/artifactory-go-example
+      path: bindu/artifactory-go-example
       branches:
         include: master
-      gitProvider: varsha_bbs
-
-
-  - name: go_build_info_publish_moduletest
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: varsha_art
-      buildName: go_example_module_publish_varsha
-      buildNumber: 332
+      gitProvider: bindu_github    
       
-  - name: go_build_info_publishtest
+  - name: go_buildinfopublish_moduletest
     type: BuildInfo
     configuration:
-      sourceArtifactory: varsha_art
-      buildName: go_example_build_publish_varsha
-      buildNumber: 32
-  
-  - name: promoted_go_build_info_go_publishtest
+      sourceArtifactory: bindu_art
+      buildName: go_example_module_publish_bindu
+      buildNumber: 32   
+      
+  - name: promoted_gobuild_publishtest
     type: BuildInfo
     configuration:
-      sourceArtifactory: varsha_art
+      sourceArtifactory: bindu_art
       buildName: promote_go_build_info_publish
-      buildNumber: 35
-
-pipelines:
-  - name: varsha_goBuildtest
+      buildNumber: 42   
+      
+pipelines:      
+  - name: bindu_gobuild_goBuildtest
     steps:
-      - name: build_gotest
+      - name: build_gotest_loacl
         type: GoBuild
         configuration:
-          #nodePool: ubuntu16
           sourceLocation: golang-example/hello
-          repository: test-go-local
+          repository: test-localgo-bindu
           outputLocation: /tmp/dist
-          outputFile: hello_varsha
+          outputFile: hello_bindugobuild
           inputResources:
             - name: artifactory_go_exampletest
           integrations:
-            - name: varsha_art
+            - name: bindu_art
         execution:
           onStart:
-            - go version
+            - go version    
             
-      - name: publish_go_binarytest
+      - name: bindu_publish_go_binarytest
         type: GoPublishBinary
         configuration:
           inputSteps:
-            - name: build_gotest
-          targetRepository: test-go-local
+            - name: build_gotest_loacl
+          targetRepository: test-localgo-bindu
           integrations:
-            - name: varsha_art
-     
+            - name: bindu_art    
+            
       - name: publish_buildtest
         type: PublishBuildInfo
         configuration:
           inputSteps:
             - name: publish_go_binarytest
           outputResources:
-            - name: go_build_info_publishtest
-        
-      - name: publish_go_moduletest
+            - name: go_buildinfo_publish_test      
+            
+      - name: publishgo_moduletest_bindu
         type: GoPublishModule
-        execution:
-          onStart:
-            - go version
         configuration:  
-          sourceLocation: .  # required
-          version: v0.0.0           # required
+          sourceLocation: /tem  # required
+          version: v1.0.1           # required
           targetRepository: test-go-local
           autoPublishBuildInfo: true
           integrations:
-            - name: varsha_art
+            - name: bindu_art
           inputResources:
-            - name: artifactory_go_module_example
+            - name: artifactorygo_module_example_2
           outputResources:
-            - name: go_build_info_publish_moduletest
-            
-      - name: promote_build_gotest_binary
+            - name: go_buildinfopublish_moduletest       
+        execution:
+          onStart:
+            - go version    
+             
+      - name: promote_build_gobinary
         type: PromoteBuild
         configuration:
           targetRepository: test-generic-local
           integrations:
-            - name: varsha_art
+            - name: bindu_art
           inputResources:
-            - name: go_build_info_publishtest #go_build_info_publish
+            - name: go_buildinfo_publish_test 
           outputResources:
-            - name: promoted_go_build_info_go_publishtest
+            - name: promoted_gobuild_publishtest
     
       - name: promote_build_gotest_module
         type: PromoteBuild
         configuration:
           targetRepository: test-generic-local
           integrations:
-            - name: varsha_art
+            - name: bindu_art
           inputResources:
-            - name: go_build_info_publish_moduletest
+            - name: go_buildinfopublish_moduletest 
           outputResources:
-            - name: promoted_go_build_info_go_publishtest
+            - name: promoted_gobuild_publishtest
