@@ -43,7 +43,7 @@ pipelines:
         type: GoBuild
         configuration:
           sourceLocation: golang-example/hello
-          repository: test-localgo-bindu
+          repository: test-go-local #test-localgo-bindu
           outputLocation: /tmp/dist
           outputFile: hello_bindugobuild
           inputResources:
@@ -59,7 +59,7 @@ pipelines:
         configuration:
           inputSteps:
             - name: build_gotest_loacl
-          targetRepository: test-localgo-bindu
+          targetRepository: test-go-local #test-localgo-bindu
           integrations:
             - name: bindu_art    
             
@@ -76,7 +76,7 @@ pipelines:
         configuration:  
           sourceLocation: .  # required
           version: v0.0.0           # required
-          targetRepository: test-localgo-bindu
+          targetRepository: test-go-local #test-localgo-bindu
           autoPublishBuildInfo: true
           integrations:
             - name: bindu_art
@@ -102,7 +102,7 @@ pipelines:
       - name: promote_build_gotest_module
         type: PromoteBuild
         configuration:
-          targetRepository: test-generic-local
+          targetRepository: test-localgo-bindu
           integrations:
             - name: bindu_art
           inputResources:
