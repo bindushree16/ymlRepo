@@ -67,7 +67,7 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           inputSteps:
-            - name: publish_go_binarytest
+            - name: bindu_publish_go_binarytest
           outputResources:
             - name: go_buildinfo_publish_test      
             
