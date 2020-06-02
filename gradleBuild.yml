@@ -1,10 +1,12 @@
 resources:
 
-  - name: gradleBuild_repo
+  - name: gradleBuild
     type: GitRepo
     configuration:
       gitProvider: bindu_github
       path: bindushree16/project-examples
+      branches:
+        include: master
       
   - name: gradle_buildinfo
     type: BuildInfo
@@ -31,7 +33,7 @@ pipelines:
           configFileLocation: .
           configFileName: gradle-art-config
           inputResources:
-            - name: gradleBuild_repo
+            - name: gradleBuild
           integrations:
             - name: bindu_art
         execution:
