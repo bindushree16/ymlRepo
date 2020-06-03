@@ -1,0 +1,59 @@
+resources:
+  - name: mvnBuild
+    type: GitRepo
+    configuration:
+      gitProvider: bindu_github
+      path: bindushree16/project-examples
+      branches:
+        include: master
+        
+  - name: mvn_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: mvn-build-info
+      buildNumber: 12      
+      
+  - name: mvn_PromoteBuild
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: mvn-Promote-Buildinfo
+      buildNumber: 2       
+
+pipeline: 
+  - name: mvnbuild_pipeline_test 
+    steps:
+      - name: mvnbuild_test
+        type: MvnBuild
+        configuration:
+          mvnCommand: clean install
+          sourceLocation: ./artifactory-maven-plugin-example 
+          configLocation: .
+          configFileName: mvn-art-config
+          inputResources:
+            - name: mvnBuild      
+          integrations:
+            - name: bindu_art      
+        execution:
+          onStart:
+            - javac -version
+            - mvn --version  
+            
+            
+      - name: mvnbuild_publish
+        type: PublishBuildInfo
+        configuration:
+          inputSteps: 
+            - name: mvnbuild_test 
+          outputResources:
+            - name: mvn_buildinfo
+                        
+      - name: mvnbuild_promote
+        type: PromoteBuild
+        configuration:
+          targetRepository: test-localmvn-bindu
+          inputResources:
+            - name: mvn_buildinfo   
+          outputResources:      
+            - name: mvn_PromoteBuild 
