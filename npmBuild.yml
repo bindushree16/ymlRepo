@@ -1,0 +1,61 @@
+resources:
+  - name: npmHelloWorld_repo
+    type: GitRepo
+    configuration:
+      path: bindushree16/npmHelloWorld
+      gitProvider: bindu_github
+
+  - name: npm_build_info_publish1
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: npm_publish
+      buildNumber: 1
+  
+  - name: npm_build_info_promoted
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: bindu_art
+      buildName: npm+promote
+      buildNumber: 1
+      
+pipelines:
+  - name: npmBuild_example_test
+    steps:
+      - name: build_npm
+        type: NpmBuild
+        configuration:
+          repositoryName: npm-virtual
+          sourceLocation: .
+          inputResources:
+            - name: npmHelloWorld_repo
+          integrations:
+            - name: bindu_art
+
+      - name: publish_npm
+        type: NpmPublish
+        configuration:
+          repositoryName: npm-virtual
+          inputSteps:
+            - name: build_npm
+          integrations:
+            - name: bindu_art
+
+      - name: publish_build_info
+        type: PublishBuildInfo
+        configuration:
+          inputSteps:
+            - name: publish_npm  
+          outputResources:
+            - name: npm_build_info_publish1
+            
+      - name: promote_build_npm
+        type: PromoteBuild
+        configuration:
+          targetRepository: test-generic-local
+          integrations:
+            - name: bindu_art
+          inputResources:
+            - name: npm_build_info_publish1
+          outputResources:
+            - name: npm_build_info_promoted       
