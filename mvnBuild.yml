@@ -21,7 +21,7 @@ resources:
       buildName: mvn-Promote-Buildinfo
       buildNumber: 2       
 
-pipeline: 
+pipelines: 
   - name: mvnbuild_pipeline_test 
     steps:
       - name: mvnbuild_test
