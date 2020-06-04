@@ -20,9 +20,9 @@ resources:
       buildNumber: 1
       
 pipelines:
-  - name: npmBuild_example_test
+  - name: npmBuild_pipelines_test
     steps:
-      - name: build_npm
+      - name: build_npm_step
         type: NpmBuild
         configuration:
           repositoryName: npm-virtual-bi
@@ -37,7 +37,7 @@ pipelines:
         configuration:
           repositoryName: npm-virtual-bi
           inputSteps:
-            - name: build_npm
+            - name: build_npm_step
           integrations:
             - name: bindu_art
 
