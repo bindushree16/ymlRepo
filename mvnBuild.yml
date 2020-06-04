@@ -57,3 +57,8 @@ pipelines:
             - name: mvn_buildinfo   
           outputResources:      
             - name: mvn_PromoteBuild 
+
+
+
+# libs-snapshot-bi(this is virtual) -> libs-snapshot-local-bi, libs-snapshot-remote-bi
+# libs-release-bi(this is virtual) -> test-localmvn-bindu, test-remotemvn-bindu
