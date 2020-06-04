@@ -58,4 +58,10 @@ pipelines:
           inputResources:
             - name: npm_build_info_publish1
           outputResources:
-            - name: npm_build_info_promoted       
+            - name: npm_build_info_promoted 
+            
+            
+            
+            
+#            npm-virtual-bi(this is virtual) -> npm-local-bi, npm-remote-bi 
+#            test-genericbi-local (this is local)
