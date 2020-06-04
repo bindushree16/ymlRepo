@@ -25,7 +25,7 @@ pipelines:
       - name: build_npm
         type: NpmBuild
         configuration:
-          repositoryName: npm-virtual
+          repositoryName: npm-virtual-bi
           sourceLocation: .
           inputResources:
             - name: npmHelloWorld_repo
@@ -35,7 +35,7 @@ pipelines:
       - name: publish_npm
         type: NpmPublish
         configuration:
-          repositoryName: npm-virtual
+          repositoryName: npm-virtual-bi
           inputSteps:
             - name: build_npm
           integrations:
@@ -52,7 +52,7 @@ pipelines:
       - name: promote_build_npm
         type: PromoteBuild
         configuration:
-          targetRepository: test-generic-local
+          targetRepository: test-genericbi-local
           integrations:
             - name: bindu_art
           inputResources:
