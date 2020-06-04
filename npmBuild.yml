@@ -1,18 +1,18 @@
 resources:
-  - name: npmHelloWorld_repo
+  - name: npmbuild_repo
     type: GitRepo
     configuration:
       path: bindushree16/npmHelloWorld
       gitProvider: bindu_github
 
-  - name: npm_build_info_publish1
+  - name: npmbuild_info_publish1
     type: BuildInfo
     configuration:
       sourceArtifactory: bindu_art
       buildName: npm_publish
       buildNumber: 1
   
-  - name: npm_build_info_promoted
+  - name: npmbuild_promoted
     type: BuildInfo
     configuration:
       sourceArtifactory: bindu_art
@@ -28,7 +28,7 @@ pipelines:
           repositoryName: npm-virtual-bi
           sourceLocation: .
           inputResources:
-            - name: npmHelloWorld_repo
+            - name: npmbuild_repo
           integrations:
             - name: bindu_art
 
@@ -47,7 +47,7 @@ pipelines:
           inputSteps:
             - name: publish_npm  
           outputResources:
-            - name: npm_build_info_publish1
+            - name: npmbuild_info_publish1
             
       - name: promote_build_npm
         type: PromoteBuild
@@ -56,9 +56,9 @@ pipelines:
           integrations:
             - name: bindu_art
           inputResources:
-            - name: npm_build_info_publish1
+            - name: npmbuild_info_publish1
           outputResources:
-            - name: npm_build_info_promoted 
+            - name: npmbuild_promoted 
             
             
             
