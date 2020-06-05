@@ -63,5 +63,6 @@ pipelines:
             
             
             
-#            npm-virtual-bi(this is virtual) -> npm-local-bi, npm-remote-bi 
+#            npm-virtual-bi(this is virtual) -> npm-local-bi, npm-remote-bi and in the same 
+#            npm-virtual-bi page Default Deployment Repository npm-local-bi  
 #            test-genericbi-local (this is local)
