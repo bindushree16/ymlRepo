@@ -1,0 +1,22 @@
+resources:
+  - name: outgoingWebhook_test
+    type: OutgoingWebhook
+    configuration:
+      webhookName: outgoingwebhook
+      method: GET 
+      
+pipelines:
+  - name: utilityfuction_test1
+    steps:
+      - name: utilityFunction
+        type: Bash
+        configuration:
+          integrations:
+            - name: bindu_gitHub
+          inputResources:
+            - name: outgoingWebhook_test
+            
+        execution:
+          onExecute: 
+            - printenv
+            - set_payload outgoingWebhook_test <payload> --file      
