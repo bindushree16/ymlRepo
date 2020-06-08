@@ -19,4 +19,4 @@ pipelines:
         execution:
           onExecute: 
             - printenv
-            - set_payload outgoingWebhook_test <payload> --file      
+            - set_payload outgoingWebhook_test testpayload.json --file      
