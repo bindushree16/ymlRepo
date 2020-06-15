@@ -1,0 +1,12 @@
+
+
+pipelines:
+  - name: my_Reports
+    steps:
+      - name: my_Step
+        type: Bash
+#         configuration: 
+#           nodePool: bindu_win_node
+        execution:
+          onExecute:
+            - echo "hi"
