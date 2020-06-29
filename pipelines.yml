@@ -9,4 +9,5 @@ pipelines:
 #           nodePool: bindu_win_node
         execution:
           onExecute:
+            - printenv
             - echo "hi"
